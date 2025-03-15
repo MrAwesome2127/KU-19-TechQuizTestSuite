@@ -1,145 +1,57 @@
 # 19 Testing: Tech Quiz Test Suite
 
-## Your Task
+# About Me
 
-Your assignment this week underscores the importance of ensuring reliability and robustness in modern web applications through comprehensive testing. In today's dynamic development environment, testing is not just an afterthought but a critical part of the development process that ensures applications meet user demands and perform efficiently under various conditions.
+My name is Tim, I am an automation architect for QA. I have worked with various testing tools and this is my first experience with Cypress. You're probably thinking how has this QA nerd not been able to do Cypress yet? Great Question, also I am a nerd of quality :)
 
-This week, you'll take the starter codebase of a fully functioning Tech Quiz application and enhance it by adding Cypress for both component and end-to-end tests. The app was built using the MERN stack with a React front end, MongoDB database, and Node.js/Express.js server and API. It allows users to take a quiz of ten random questions and view their final score.
+# I have two tests. One with custom ID's and the other without:
+- Tech Quiz without ID
+- Tech Quiz with ID
 
-To complete the assignment, you’ll need to do the following:
+### My TODO's
+I wanted to create an automation framework that followed automation principles. To do this I needed to expand from below.
 
-1. Install Cypress as a dev dependency
+ - I created unique IDs to help improve the run-time and prevent brittleness
+ - Each element that I used has a created ID. For my naming convention, I wanted to start with the type of the element, then the name to keep it unique. 
+   - `id="btnStartQuiz"`
+   - `id="fldScore"`
+   - `id="tblQuestions"`
+   - `id="txtQuizOver"`
+ - This sounds simple. To enhance my challenge, I wanted to create the Answer options from the index to allow the unique characteristics to be applied.
+   - In `Quiz.ts`, I added this `id={"btnAnswer-${index}"}` to have the the name appear based on iteration, starting with 0. Pretty Cool, right?!
+ - I Hope you enjoyed your time with me, thanks for looking at this.
 
-2. Configure Cypress for both component and end-to-end testing
+## Cypress Vs. Selenium Vs. Playwright
 
-3. Create a component test for the quiz component
+When it comes to end-to-end testing frameworks, Cypress, Selenium, and Playwright are three popular choices. Each has its own strengths and weaknesses, and the best choice depends on your specific needs and preferences. Here is a comparison of these three tools ranked by popularity:
 
-4. Create an end-to-test for the quiz component
+### #1 Selenium
+- Flexibility: Selenium is a widely-used tool that supports multiple programming languages (Java, C#, Python, Ruby, JavaScript, etc.) and can be used to test web applications across different browsers (Chrome, Firefox, Safari, Internet Explorer, Edge) and platforms.
+- Community and Ecosystem: Selenium has a large community and a rich ecosystem of tools and libraries that extend its functionality.
+- Complexity: Setting up and configuring Selenium can be more complex compared to Cypress. It often requires additional libraries and tools for assertions, reporting, and browser management.
+- Speed: Selenium tests can be slower and less reliable due to the communication between the test scripts and the browser.
 
-## User Story
+### #2 Playwright
 
-```md
-AS AN aspiring developer
-I WANT to take a tech quiz
-SO THAT I can test my knowledge and improve my skills
-```
+- Popularity: Playwright is relatively new but is quickly gaining traction due to its modern features and capabilities.
+- Cross-Browser Testing: Playwright supports testing across multiple browsers (Chromium, Firefox, WebKit) and platforms, including mobile devices.
+- Modern Features: Playwright provides modern testing features such as auto-waiting, capturing screenshots and videos, and network interception.
+- Flexibility: Playwright supports multiple programming languages (JavaScript, TypeScript, Python, C#) and integrates well with various test runners and frameworks.
+- Debugging: Playwright offers powerful debugging tools, including the Playwright Inspector, which allows you to step through your tests and inspect the state of your application.
 
-## Acceptance Criteria
+### #3 Cypress
 
-```md
-GIVEN I am taking a tech quiz
-WHEN I click the start button
-THEN the quiz starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN all questions are answered
-THEN the quiz is over
-WHEN the quiz is over
-THEN I can view my score
-WHEN the quiz is over
-THEN I can start a new quiz
-```
+- Popularity: Cypress is gaining popularity rapidly due to its developer-friendly setup and ease of use. It is especially popular among front-end developers.
+- Ease of Use: Cypress provides an all-in-one testing framework, assertion library, and mocking/stubbing without requiring additional libraries.
+- Speed: Cypress runs in the same run-loop as your application, which makes it faster and more reliable for testing modern web applications.
+- Debugging: Cypress provides excellent debugging capabilities with detailed error messages, stack traces, and the ability to time-travel through tests.
+- Limitations: Cypress currently only supports testing in Chrome, Firefox, and Edge browsers. It does not support cross-browser testing in Safari or Internet Explorer.
 
-## Mock-Up
+### Conclusion
 
-The following animation demonstrates the application functionality:
+- **Selenium** remains the most popular choice due to its long history, flexibility, and large community. Target audience, QA team.
 
-![A GIF demonstrates a functioning quiz.](./Assets/19-testing-homework-demo.gif)
+- **Playwright** offers a modern and powerful testing framework with excellent cross-browser support and advanced features, making it a strong contender for comprehensive end-to-end testing. Target audience, DEV/QA team.
 
-## Getting Started
+- **Cypress** is a great choice for developers looking for an easy-to-use, fast, and reliable testing framework for modern web applications, especially if cross-browser testing is not a primary concern.  Target audience, DEV team.
 
-This Challenge combines many of the skills we've covered so far. In addition to the user story and acceptance criteria, we’ve provided some guidelines to help you get started.
-
-Because this Challenge requires a video submission, refer to the [Full-Stack Blog video submission guide](https://coding-boot-camp.github.io/full-stack/computer-literacy/video-submission-guide) for guidance on creating and sharing a video.
-
-**Important**: You won't need to modify code for the existing application. In this challenge, you'll only be creating tests for the existing application.
-
-Your testing should use [Cypress](https://docs.cypress.io/guides/overview/why-cypress) to run both the component tests and the end-to-end tests. The testing will be invoked using the following command:
-
-```bash
-npm run test
-```
-
-It's recommended that you start with a directory structure that looks like the following example:
-
-```md
-.
-├── client/                 // the client application
-├── cypress/                // Folder for Cypress
-    ├── component/          // Folder for component tests
-        └── Quiz.cy.jsx     // Component tests for the Quiz component
-    ├── e2e/                // Folder for end-to-end tests
-        └── quiz.cy.js      // End-to-end tests for the Tech Quiz
-    ├── fixtures/           // Folder for test fixtures
-        └── questions.json  // Mock data for testing
-    └── tsconfig.json
-├── server/                 // the server application
-├── .gitignore
-├── cypress.config.ts       // Runs the application using imports from lib/
-├── package.json
-├── tsconfig.json
-└── README.md              // App description, link to video, setup and usage instructions           
-```
-
-**Note**: The server for this application requires environment variables to function properly. You'll need to rename the `.env.example` file to `.env`.
-
-## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it's considered incomplete and won't count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This Challenge is graded based on the following criteria:
-
-### Deliverables: 15%
-
-* Your GitHub repository must contain the application code as well as the configuration and tests using Cypress.
-
-### Walkthrough Video: 32%
-
-* A walkthrough video that demonstrates the component and end-to-end tests running and passing must be submitted.
-
-* The `README.md` file must include a link to the walkthrough video.
-
-* The walkthrough video must show all tests passing from the command line.
-
-* The walkthrough video must demonstrate how a user would invoke the application from the command line.
-
-### Technical Acceptance Criteria: 40%
-
-* Your submission should satisfy all of the preceding acceptance criteria in addition to the following:
-
-  * You must use the [Cypress package](https://www.npmjs.com/package/cypress).
-
-  * The application must have a component test for the quiz component.
-
-  * The application must have an end-to-end test for the quiz component.
-
-### Repository Quality: 13%
-
-* Your repository has a unique name.
-
-* Your repository follows the best practices for file structure and naming conventions.
-
-* Your repository follows the best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Your repository contains multiple descriptive commit messages.
-
-* Your repository contains a high-quality README with a description and a link to your walkthrough video.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* A walkthrough video that demonstrates the functionality of the application and the application successfully passing tests.
-
-* The URL of your GitHub repository, which should have a unique name and include a README describing the project.
-
----
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
