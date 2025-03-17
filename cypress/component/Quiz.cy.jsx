@@ -1,58 +1,21 @@
 import Quiz from "../../client/src/components/Quiz";
 import React from 'react'
 
-describe('<Quiz />', () => {
-  it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
-    cy.mount(<Quiz />)
-    cy.get('button').contains('Start Quiz').click();
-    cy.get('.card').should('be.visible');
-    cy.get('h2').should('not.be.empty');
-  });
-  
-  it('should answer questions and complete the quiz', () => {
-    cy.mount(<Quiz />);
-    cy.get('button').contains('Start Quiz').click();
-
-    // Answer questions
-    cy.get('button').contains('1').click();
-
-    // Verify the quiz completion
-    cy.get('.alert-success').should('be.visible').and('contain', 'Your score');
-  });
-
-  it('should restart the quiz after completion', () => {
-    cy.mount(<Quiz />);
-    cy.get('button').contains('Start Quiz').click();
-
-    // Answer questions
-    cy.get('button').contains('1').click();
-
-    // Restart the quiz
-    cy.get('button').contains('Take New Quiz').click();
-
-    // Verify the quiz is restarted
-    cy.get('.card').should('be.visible');
-    cy.get('h2').should('not.be.empty');
-  });
-})
-
-
 describe('Quiz Component', () => {
-  beforeEach(() => {
+ beforeEach(() => {
     cy.intercept({
         method: 'GET',
         url: '/api/questions/random' // Ensure this is set to the correct URL
       },
       {
-        fixture: 'questions.json',
+        fixture: 'example.json',
         statusCode: 200
       }
     ).as('getRandomQuestion');
   });
 
   it('should start the quiz and display the first question', () => {
-    cy.mount(<Quiz />);
+    cy.mount(<Quiz />); 
     cy.get('button').contains('Start Quiz').click();
     cy.get('.card').should('be.visible');
     cy.get('h2').should('not.be.empty');
@@ -66,7 +29,7 @@ describe('Quiz Component', () => {
     cy.get('button').contains('1').click();
 
     // Verify the quiz completion
-    cy.get('.alert-success').should('be.visible').and('contain', 'Your score');
+    cy.get('.alert.alert-success').should('be.visible').and('contain', 'Your score');
   });
 
   it('should restart the quiz after completion', () => {
